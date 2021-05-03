@@ -1,0 +1,49 @@
+@import "../node_modules/antd/lib/spin/style/index.css";
+@import "../node_modules/antd/lib/alert/style/index.css";
+@import "../node_modules/antd/lib/steps/style/index.css";
+@import "../node_modules/antd/lib/icon/style/index.css";
+
+/* @import "../node_modules/antd/lib/pagination/style/index.css";
+@import "../node_modules/antd/lib/dropdown/style/index.css";
+@import "../node_modules/antd/lib/menu/style/index.css";
+@import "../node_modules/antd/lib/select/style/index.css"; */
+main {
+  min-height: calc(100vh - 132px);
+}
+.rating span {
+  margin: 0.1rem;
+}
+.flex-basis-0 {
+  flex-basis: 0;
+}
+.flex-basis-16 {
+  flex-basis: 16.666667%;
+  max-width: 16.666667%;
+}
+.flex-basis-25 {
+  flex-basis: 25%;
+  max-width: 25%;
+}
+.flex-basis-33 {
+  flex-basis: 33.333333%;
+  max-width: 33.333333%;
+}
+.flex-basis-40 {
+  flex-basis: 40%;
+  max-width: 40%;
+}
+.flex-basis-50 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+.flex-basis-60 {
+  flex-basis: 60%;
+  max-width: 60%;
+}
+.flex-basis-75 {
+  flex-basis: 75%;
+  max-width: 75%;
+}
+.input-h {
+  height: calc(1.5em + 1.5rem);
+}
