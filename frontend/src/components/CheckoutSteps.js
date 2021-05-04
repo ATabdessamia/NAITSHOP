@@ -47,7 +47,7 @@ const CheckoutSteps = ({ History, Current }) => {
     <Steps
       current={current}
       onChange={onChange}
-      size="small"
+      size="default"
       className="mb-5 mt-10"
     >
       {steps.map((item, i) => (

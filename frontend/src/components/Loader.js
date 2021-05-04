@@ -7,7 +7,7 @@ const Loader = () => {
       <Spin
         tip="Loading..."
         size="large"
-        className="bg-red-100 container mx-auto w-full"
+        className="container mx-auto w-full"
       />
     </div>
   );
