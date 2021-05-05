@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
+import Card from "../components/styledComponents/Card";
 import { createOrder } from "../actions/orderActions";
+import CardButton from "../components/styledComponents/CardButton";
+import CardSpan from "../components/styledComponents/CardSpan";
+import CardList from "../components/styledComponents/CardList";
+import CardListItems from "../components/styledComponents/CardListItems";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -117,47 +122,37 @@ const PlaceOrderScreen = ({ history }) => {
             </div>
           </div>
         </div>
-        <div className="px-5 w-full md:w-2/5 md:flex-basis-40 relative text-sm sm:text-base md:text-sm lg:text-base break-word bg-clip-border min-w-0 flex flex-col">
-          <div className="divide-y > * divide-gray-900 > * divide-opacity-20 border flex flex-col pl-0 mb-0">
-            <div className="py-3 relative block px-5">
+        <Card>
+          <CardList bordred flexed>
+            <CardListItems>
               <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-2xl font-medium tracking-widest">
                 order summary
               </h2>
-            </div>
-            <div className="py-3 relative block px-5 text-gray-700 text-opacity-80 capitalize">
+            </CardListItems>
+            <CardListItems capitalize>
               <div className="-mx-3.5 flex flex-wrap px-3">
-                <div className="flex-grow flex-basis-0 max-w-full">items</div>
-                <div className="flex-grow flex-basis-0 max-w-full">
-                  ${cart.itemsPrice}
-                </div>
+                <CardSpan text="items:" />
+                <CardSpan strong={cart.itemsPrice} />
               </div>
-            </div>
-            <div className="py-3 relative block px-5 text-gray-700 text-opacity-80 capitalize">
+            </CardListItems>
+            <CardListItems capitalize>
               <div className="-mx-3.5 flex flex-wrap px-3">
-                <div className="flex-grow flex-basis-0 max-w-full">
-                  shipping
-                </div>
-                <div className="flex-grow flex-basis-0 max-w-full">
-                  ${cart.shippingPrice}
-                </div>
+                <CardSpan text="shipping:" />
+                <CardSpan strong={cart.shippingPrice} />
               </div>
-            </div>
-            <div className="py-3 relative block px-5 text-gray-700 text-opacity-80 capitalize">
+            </CardListItems>
+            <CardListItems capitalize>
               <div className="-mx-3.5 flex flex-wrap px-3">
-                <div className="flex-grow flex-basis-0 max-w-full">tax</div>
-                <div className="flex-grow flex-basis-0 max-w-full">
-                  ${cart.taxPrice}
-                </div>
+                <CardSpan text="tax:" />
+                <CardSpan strong={cart.taxPrice} />
               </div>
-            </div>
-            <div className="py-3 relative block px-5 text-gray-700 text-opacity-80 capitalize">
+            </CardListItems>
+            <CardListItems capitalize>
               <div className="-mx-3.5 flex flex-wrap px-3">
-                <div className="flex-grow flex-basis-0 max-w-full">total</div>
-                <div className="flex-grow flex-basis-0 max-w-full">
-                  ${cart.totalPrice}
-                </div>
+                <CardSpan text="total:" />
+                <CardSpan strong={cart.totalPrice} />
               </div>
-            </div>
+            </CardListItems>
             {error && (
               <div className="">
                 <Message
@@ -169,23 +164,17 @@ const PlaceOrderScreen = ({ history }) => {
             )}
             <div className="">
               {cart.cartItems.length === 0 ? (
-                <button
+                <CardButton
                   className="bg-green-900 text-gray-100 uppercase w-full p-3 inline-block text-sm disabled:opacity-50 cursor-default"
                   disabled
-                >
-                  place order
-                </button>
+                  text="place order"
+                />
               ) : (
-                <button
-                  className="bg-green-900 opacity-90 text-gray-100 uppercase w-full p-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-200 hover:opacity-100 inline-block text-sm transition-colors ease-in-out"
-                  onClick={placeOrderHandler}
-                >
-                  place order
-                </button>
+                <CardButton onClick={placeOrderHandler} text="place order" />
               )}
             </div>
-          </div>
-        </div>
+          </CardList>
+        </Card>
       </div>
     </>
   );

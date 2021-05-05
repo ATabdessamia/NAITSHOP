@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Select from "../components/styledComponents/Select";
+import Card from "../components/styledComponents/Card";
+import CardButton from "../components/styledComponents/CardButton";
+import Image from "../components/styledComponents/Image";
+import CardList from "../components/styledComponents/CardList";
+import CardListItems from "../components/styledComponents/CardListItems";
+import CardSpan from "../components/styledComponents/CardSpan";
 import { listProductDetails } from "../actions/productActions";
 
 const ProductScreen = ({ history, match }) => {
@@ -41,15 +48,11 @@ const ProductScreen = ({ history, match }) => {
         />
       ) : (
         <div className="my-10 -mx-3.5 flex flex-wrap">
-          <div className="px-5 w-full md:w-1/2 md:flex-basis-50 relative">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="max-w-full h-auto align-middle flex-shrink-0 object-center shadow-sm"
-            />
-          </div>
-          <div className="px-5 w-full md:w-3/12 md:flex-basis-25 relative">
-            <ul className="divide-y > * divide-gray-900 > * divide-opacity-20 text-opacity-70 text-gray-900">
+          <Card className="px-5 w-full md:w-1/2 md:flex-basis-50 relative">
+            <Image src={product.image} alt={product.name} />
+          </Card>
+          <Card className="px-5 w-full md:w-3/12 md:flex-basis-25 relative">
+            <CardList>
               <li className="py-3 relative block px-5">
                 <h3 className="uppercase text-lg sm:text-2xl md:text-xl lg:text-3xl font-medium">
                   {product.name}
@@ -67,65 +70,48 @@ const ProductScreen = ({ history, match }) => {
               <li className="py-3 relative block px-5 text-sm sm:text-base md:text-sm lg:text-base">
                 Description: {product.description}
               </li>
-            </ul>
-          </div>
-          <div className="w-full md:w-3/12 md:flex-basis-25 text-sm sm:text-base md:text-sm lg:text-base break-word bg-clip-border px-5 relative min-w-0 flex flex-col">
-            <ul className="divide-y > * divide-gray-900 > * divide-opacity-20 border">
-              <li className="p-3 flex flex-wrap items-center justify-center">
-                <span className="flex-grow max-w-full flex-basis-0">
-                  Price:
-                </span>
-                <span className="flex-grow max-w-full flex-basis-0">
-                  <strong>${product.price}</strong>
-                </span>
-              </li>
-              <li className="p-3 flex flex-wrap items-center justify-center">
-                <span className="flex-grow max-w-full flex-basis-0">
-                  Status:
-                </span>
-                <span className="flex-grow max-w-full flex-basis-0">
-                  {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                </span>
-              </li>
+            </CardList>
+          </Card>
+          <Card className="w-full md:w-3/12 md:flex-basis-25 text-sm sm:text-base md:text-sm lg:text-base break-word bg-clip-border px-5 relative min-w-0 flex flex-col">
+            <CardList bordred>
+              <CardListItems flexed>
+                <CardSpan text="Price:" />
+                <CardSpan strong={product.price} />
+              </CardListItems>
+              <CardListItems flexed>
+                <CardSpan text="Status:" />
+                <CardSpan
+                  text={product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                />
+              </CardListItems>
               {product.countInStock > 0 && (
-                <li className="p-3 flex flex-wrap items-center justify-center">
-                  <span className="flex-grow max-w-full flex-basis-0">
-                    Qty:
-                  </span>
-                  <select
-                    className="flex-grow max-w-full flex-basis-0 p-2 md:p-1 lg:p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200 transition-colors ease-in-out"
+                <CardListItems flexed>
+                  <CardSpan text="Qty:" />
+                  <Select
                     value={qty}
                     onChange={(e) => setQty(e.target.value)}
-                  >
-                    {[...Array(product.countInStock).keys()].map((q) => (
-                      <option key={q + 1} value={q + 1}>
-                        {q + 1}
-                      </option>
-                    ))}
-                  </select>
-                </li>
+                    countItem={product}
+                  />
+                </CardListItems>
               )}
 
-              <li className="p-3 flex flex-wrap items-center justify-center">
+              <CardListItems flexed>
                 {product.countInStock === 0 ? (
-                  <button
+                  <CardButton
                     className="bg-green-900 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 inline-block text-sm disabled:opacity-50 cursor-default"
-                    type="button"
+                    text="add to cart"
                     disabled
-                  >
-                    add to cart
-                  </button>
+                  />
                 ) : (
-                  <button
+                  <CardButton
                     className="bg-green-900 opacity-90 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-800 hover:opacity-100 inline-block text-sm transition-colors ease-in-out"
                     onClick={addToCartHandler}
-                  >
-                    add to cart
-                  </button>
+                    text="add to cart"
+                  />
                 )}
-              </li>
-            </ul>
-          </div>
+              </CardListItems>
+            </CardList>
+          </Card>
         </div>
       )}
     </div>

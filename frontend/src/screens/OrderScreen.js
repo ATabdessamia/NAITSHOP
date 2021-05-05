@@ -5,6 +5,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Card from "../components/styledComponents/Card";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
@@ -196,7 +197,7 @@ const OrderScreen = ({ match }) => {
                 </div>
               </div>
             </div>
-            <div className="px-5 w-full md:w-2/5 md:flex-basis-40 relative text-sm sm:text-base md:text-sm lg:text-base break-word bg-clip-border min-w-0 flex flex-col">
+            <Card>
               <div className="divide-y > * divide-gray-900 > * divide-opacity-20 border flex flex-col pl-0 mb-0">
                 <div className="py-3 relative block px-5">
                   <h2 className="uppercase text-gray-700 py-2 text-2xl font-medium tracking-widest">
@@ -255,7 +256,7 @@ const OrderScreen = ({ match }) => {
                   </div>
                 )}
               </div>
-            </div>
+            </Card>
           </div>
         </>
       )}
