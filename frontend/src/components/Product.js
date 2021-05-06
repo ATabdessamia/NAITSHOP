@@ -29,7 +29,9 @@ const Product = ({ product }) => {
         <Rating value={product.rating} text={`${product.numReviews} reviews`} />
       </div>
 
-      <h3 className="text-xl px-3 my-2 font-semibold">${product.price}</h3>
+      <h3 className="text-lg sm:text-xl px-3 my-2 font-semibold">
+        ${product.price}
+      </h3>
     </div>
   );
 };

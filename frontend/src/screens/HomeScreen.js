@@ -17,7 +17,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1 className="text-3xl md:text-4xl uppercase text-gray-700 p-1 tracking-widest font-extrabold mt-10">
+      <h1 className="text-xl sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 tracking-widest font-extrabold mt-10">
         latest products
       </h1>
       {loading ? (

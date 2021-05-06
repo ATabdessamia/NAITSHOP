@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 import Card from "../components/styledComponents/Card";
-import { createOrder } from "../actions/orderActions";
 import CardButton from "../components/styledComponents/CardButton";
-import CardSpan from "../components/styledComponents/CardSpan";
 import CardList from "../components/styledComponents/CardList";
 import CardListItems from "../components/styledComponents/CardListItems";
+import DivideBox from "../components/styledComponents/DivideBox";
+import DivideBoxItem from "../components/styledComponents/DivideBoxItem";
+import Image from "../components/styledComponents/Image";
+import DivideBoxParagraph from "../components/styledComponents/DivideBoxParagraph";
+import DivideFlex from "../components/styledComponents/DivideFlex";
+import CardGrowItem from "../components/styledComponents/CardGrowItem";
+import ItemsDetail from "../components/styledComponents/ItemsDetail";
+import { createOrder } from "../actions/orderActions";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -55,32 +62,20 @@ const PlaceOrderScreen = ({ history }) => {
     <>
       <CheckoutSteps Current="3" History={history} />
       <div className="-mx-3.5 flex flex-wrap">
-        <div className="px-5 w-full md:w-3/5 md:flex-basis-60 relative">
-          <div className="flex flex-col pl-0 divide-y > * divide-gray-900 > * divide-opacity-20 text-opacity-70 text-gray-900 text-sm sm:text-base md:text-sm lg:text-base my-3 justify-center">
-            <div className="py-3 relative block px-5">
-              <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-2xl font-medium tracking-widest">
-                shipping
-              </h2>
-              <p className="mb-1">
-                <strong className="font-normal mr-1 capitalize">
-                  address:
-                </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
-                {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
-              </p>
-            </div>
-            <div className="py-3 relative block px-5">
-              <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-2xl font-medium tracking-widest">
-                payment method
-              </h2>
-              <strong className="font-normal mr-1 capitalize">method:</strong>
+        <DivideBox>
+          <DivideBoxItem title="shipping">
+            <DivideBoxParagraph title="address">
+              {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
+              {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
+            </DivideBoxParagraph>
+          </DivideBoxItem>
+          <DivideBoxItem title="payment method">
+            <DivideBoxParagraph title="method">
               <span>{cart.paymentMethod}</span>
-            </div>
-            <div className="py-3 relative block px-5">
-              <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-2xl font-medium tracking-widest">
-                order items
-              </h2>
+            </DivideBoxParagraph>
+          </DivideBoxItem>
+          <DivideBoxItem title="order items">
+            <div className="divide-y > * divide-gray-900 > * divide-opacity-20">
               {cart.cartItems.length === 0 ? (
                 <Message
                   message={
@@ -90,68 +85,45 @@ const PlaceOrderScreen = ({ history }) => {
                 />
               ) : (
                 cart.cartItems.map((item) => (
-                  <div
-                    className="lex flex-col pl-0 mb-3 text-opacity-70 text-gray-900 text-sm sm:text-base md:text-sm lg:text-base items-center justify-center"
-                    key={item.product}
-                  >
-                    <div className="py-3 relative block px-5 border-b">
-                      <div className="-mx-3.5 flex flex-wrap items-center">
-                        <div className="px-5 w-full md:w-2/12 md:flex-basis-16 relative mb-2 -ml-5 md:-ml-0 md:mb-0">
-                          <img
-                            src={item.image}
-                            className="max-w-full h-auto align-middle flex-shrink-0 object-center shadow-sm rounded"
-                            alt={item.name}
-                          />
-                        </div>
-                        <div className="flex-grow flex-basis-0 max-w-full mb-2 md:mb-0">
-                          <a
-                            href="/product/5f859d671d47cbccc8e11f74"
-                            className="hover:underline"
-                          >
-                            {item.name}
-                          </a>
-                        </div>
-                        <div className="px-5 w-full md:w-1/3 md:flex-basis-33 relative mb-2 -ml-5 md:-ml-0 md:mb-0">
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <DivideFlex key={item.product}>
+                    <ItemsDetail>
+                      <Image src={item.image} alt={item.name} />
+                    </ItemsDetail>
+                    <ItemsDetail className="flex-grow flex-basis-0 max-w-full mb-2 md:mb-0">
+                      <Link
+                        to={`/product/${item.product}`}
+                        className="hover:underline text-gray-700 text-opacity-90 hover:text-opacity-100"
+                      >
+                        {item.name}
+                      </Link>
+                    </ItemsDetail>
+                    <ItemsDetail className="px-5 w-full md:w-1/3 md:flex-basis-33 relative mb-2 md:mb-0">
+                      {item.qty} x ${item.price} = ${item.qty * item.price}
+                    </ItemsDetail>
+                  </DivideFlex>
                 ))
               )}
             </div>
-          </div>
-        </div>
+          </DivideBoxItem>
+        </DivideBox>
         <Card>
           <CardList bordred flexed>
             <CardListItems>
-              <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-2xl font-medium tracking-widest">
+              <h2 className="uppercase text-gray-700 py-2 text-lg sm:text-xl lg:text-2xl font-medium tracking-widest">
                 order summary
               </h2>
             </CardListItems>
             <CardListItems capitalize>
-              <div className="-mx-3.5 flex flex-wrap px-3">
-                <CardSpan text="items:" />
-                <CardSpan strong={cart.itemsPrice} />
-              </div>
+              <CardGrowItem title="items" price={cart.itemsPrice} />
             </CardListItems>
             <CardListItems capitalize>
-              <div className="-mx-3.5 flex flex-wrap px-3">
-                <CardSpan text="shipping:" />
-                <CardSpan strong={cart.shippingPrice} />
-              </div>
+              <CardGrowItem title="shipping" price={cart.shippingPrice} />
             </CardListItems>
             <CardListItems capitalize>
-              <div className="-mx-3.5 flex flex-wrap px-3">
-                <CardSpan text="tax:" />
-                <CardSpan strong={cart.taxPrice} />
-              </div>
+              <CardGrowItem title="tax" price={cart.taxPrice} />
             </CardListItems>
             <CardListItems capitalize>
-              <div className="-mx-3.5 flex flex-wrap px-3">
-                <CardSpan text="total:" />
-                <CardSpan strong={cart.totalPrice} />
-              </div>
+              <CardGrowItem title="total" price={cart.totalPrice} />
             </CardListItems>
             {error && (
               <div className="">
@@ -162,7 +134,7 @@ const PlaceOrderScreen = ({ history }) => {
                 />
               </div>
             )}
-            <div className="">
+            <div className="p-3 relative block px-5">
               {cart.cartItems.length === 0 ? (
                 <CardButton
                   className="bg-green-900 text-gray-100 uppercase w-full p-3 inline-block text-sm disabled:opacity-50 cursor-default"

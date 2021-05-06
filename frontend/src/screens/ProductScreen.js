@@ -98,13 +98,13 @@ const ProductScreen = ({ history, match }) => {
               <CardListItems flexed>
                 {product.countInStock === 0 ? (
                   <CardButton
-                    className="bg-green-900 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 inline-block text-sm disabled:opacity-50 cursor-default"
+                    className="bg-green-900 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 inline-block text-xs sm:text-sm md:text-xs lg:text-sm disabled:opacity-50 cursor-default"
                     text="add to cart"
                     disabled
                   />
                 ) : (
                   <CardButton
-                    className="bg-green-900 opacity-90 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-800 hover:opacity-100 inline-block text-sm transition-colors ease-in-out"
+                    className="bg-green-900 opacity-90 text-gray-100 uppercase w-full p-3 md:p-1 lg:p-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-800 hover:opacity-100 inline-block text-xs sm:text-sm md:text-xs lg:text-sm transition-colors ease-in-out"
                     onClick={addToCartHandler}
                     text="add to cart"
                   />

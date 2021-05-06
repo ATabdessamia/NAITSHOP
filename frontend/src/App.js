@@ -19,7 +19,7 @@ const App = () => {
     <>
       <Router>
         <Header />
-        <main className="mx-auto container p-3 font-nunito leading-relaxed overflow-hidden sm:bg-red-100 md:bg-green-100 lg:bg-blue-100 xl:bg-indigo-100 2xl:bg-purple-100">
+        <main className="mx-auto container p-3 font-nunito leading-relaxed overflow-hidden">
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
