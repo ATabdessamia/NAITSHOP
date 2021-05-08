@@ -42,6 +42,12 @@ const Header = () => {
     setBurger(!burger);
   };
 
+  const dropDownHandler = () => {
+    setSign(true);
+    setCart(false);
+    setDrop(!drop);
+  };
+
   const burgerHidden = burger
     ? "transition ease-out duration-100 transform hidden opacity-0 scale-95"
     : "transition ease-out duration-100 transform opacity-100 scale-100";
@@ -85,11 +91,7 @@ const Header = () => {
             {userInfo ? (
               <DropDown
                 className={`inline-flex ml-2 itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
-                dropDown={() => {
-                  setSign(true);
-                  setCart(false);
-                  setDrop(!drop);
-                }}
+                dropDown={dropDownHandler}
                 dropHidden={dropHidden}
                 text={userInfo.name}
                 onClick={logoutHandler}
@@ -104,6 +106,15 @@ const Header = () => {
                 }}
                 text="sign in"
                 svg="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+              />
+            )}
+            {userInfo && userInfo.isAdmin && (
+              <DropDown
+                className={`inline-flex ml-2 itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
+                dropDown={dropDownHandler}
+                dropHidden={dropHidden}
+                text="Admin"
+                isAdmin
               />
             )}
           </div>
@@ -132,9 +143,7 @@ const Header = () => {
             <DropDown
               className={`inline-flex itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer text-lg items-center`}
               dropDown={() => {
-                setSign(true);
-                setCart(false);
-                setDrop(!drop);
+                dropDownHandler();
               }}
               dropHidden={dropHidden}
               text={userInfo.name}
@@ -150,6 +159,17 @@ const Header = () => {
               }}
               text="sign in"
               svg="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+            />
+          )}
+          {userInfo && userInfo.isAdmin && (
+            <DropDown
+              className={`inline-flex itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer text-lg items-center`}
+              dropDown={() => {
+                dropDownHandler();
+              }}
+              dropHidden={dropHidden}
+              text="Admin"
+              isAdmin
             />
           )}
         </div>

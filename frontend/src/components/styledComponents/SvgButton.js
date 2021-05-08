@@ -1,11 +1,8 @@
 import React from "react";
 
-const SvgButton = ({ onClick }) => {
+const SvgButton = ({ onClick, className }) => {
   return (
-    <button
-      className="text-red-700 flex-basis-0 inline-flex flex-grow max-w-full w-full p-2 md:p-1 lg:p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200 justify-center hover:text-red-500"
-      onClick={onClick}
-    >
+    <button className={className} onClick={onClick}>
       <svg
         className="w-6 h-6"
         fill="currentColor"
@@ -22,4 +19,8 @@ const SvgButton = ({ onClick }) => {
   );
 };
 
+SvgButton.defaultProps = {
+  className:
+    "text-red-700 flex-basis-0 inline-flex flex-grow max-w-full w-full p-2 md:p-1 lg:p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200 justify-center hover:text-red-500",
+};
 export default SvgButton;

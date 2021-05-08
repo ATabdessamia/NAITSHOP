@@ -10,6 +10,7 @@ import FormButton from "../components/styledComponents/FormButton";
 import TableTitles from "../components/styledComponents/TableTitles";
 import TableItem from "../components/styledComponents/TableItem";
 import Table from "../components/styledComponents/Table";
+import { XSvg } from "../components/styledComponents/Icons";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 
@@ -19,23 +20,6 @@ const initialState = {
   password: "",
   confirmPassword: "",
 };
-
-const Svg = (
-  <span className="text-red-500">
-    <svg
-      className="w-6 h-6"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </span>
-);
 
 const ProfileScreen = ({ location, history }) => {
   const dispatch = useDispatch();
@@ -182,13 +166,13 @@ const ProfileScreen = ({ location, history }) => {
                   <TableItem item={order.createdAt.substring(0, 10)} />
                   <TableItem item={order.totalPrice} />
                   <TableItem
-                    item={order.isPaid ? order.paidAt.substring(0, 10) : Svg}
+                    item={order.isPaid ? order.paidAt.substring(0, 10) : XSvg}
                   />
                   <TableItem
                     item={
                       order.isDelivered
                         ? order.deliveredAt.substring(0, 10)
-                        : Svg
+                        : XSvg
                     }
                   />
                   <TableItem

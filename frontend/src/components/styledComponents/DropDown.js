@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const DropDown = ({ dropDown, className, dropHidden, text, onClick }) => {
+const DropDown = ({
+  dropDown,
+  className,
+  dropHidden,
+  text,
+  onClick,
+  isAdmin,
+}) => {
   return (
     <div className="relative">
       <div className={className} onClick={dropDown}>
@@ -33,6 +40,30 @@ const DropDown = ({ dropDown, className, dropHidden, text, onClick }) => {
           logout
         </Link>
       </div>
+      {isAdmin && (
+        <div
+          className={`flex flex-col items-start bg-gray-100 rounded-md w-44 shadow-md absolute top-8 left-2 z-30 py-1 text-sm ${dropHidden}`}
+        >
+          <Link
+            to={`/admin/userList`}
+            className="w-full mb-1 hover:bg-gray-300 p-2"
+          >
+            users
+          </Link>
+          <Link
+            to={`/admin/productList`}
+            className="w-full mt-1 hover:bg-gray-300 p-2"
+          >
+            products
+          </Link>
+          <Link
+            to={`/admin/orderList`}
+            className="w-full mt-1 hover:bg-gray-300 p-2"
+          >
+            orders
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
