@@ -42,12 +42,6 @@ const Header = () => {
     setBurger(!burger);
   };
 
-  const dropDownHandler = () => {
-    setSign(true);
-    setCart(false);
-    setDrop(!drop);
-  };
-
   const burgerHidden = burger
     ? "transition ease-out duration-100 transform hidden opacity-0 scale-95"
     : "transition ease-out duration-100 transform opacity-100 scale-100";
@@ -60,8 +54,8 @@ const Header = () => {
     : "transition ease-out duration-100 transform opacity-100 scale-100";
 
   return (
-    <header className="bg-gradient-to-r from-green-600 via-green-700 to-green-800 opacity-60 p-5 shadow-md z-50 relative">
-      <nav className="mx-auto md:w-3/4 sm:w-4/5 h-full w-full ">
+    <header className="bg-gradient-to-r from-green-700 via-green-600 to-green-500 p-5 shadow-md z-50 relative">
+      <nav className="mx-auto md:w-3/4 sm:w-4/5 h-full w-full">
         <div className="flex justify-between items-center p-2">
           <div className="font-mergim font-black text-2xl text-green-50">
             <NavBrand
@@ -91,7 +85,12 @@ const Header = () => {
             {userInfo ? (
               <DropDown
                 className={`inline-flex ml-2 itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
-                dropDown={dropDownHandler}
+                dropDown={() => {
+                  setSign(true);
+                  setCart(false);
+                  setDrop(!drop);
+                }}
+                isAdmin={userInfo && userInfo.isAdmin && true}
                 dropHidden={dropHidden}
                 text={userInfo.name}
                 onClick={logoutHandler}
@@ -106,15 +105,6 @@ const Header = () => {
                 }}
                 text="sign in"
                 svg="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              />
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <DropDown
-                className={`inline-flex ml-2 itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
-                dropDown={dropDownHandler}
-                dropHidden={dropHidden}
-                text="Admin"
-                isAdmin
               />
             )}
           </div>
@@ -143,8 +133,11 @@ const Header = () => {
             <DropDown
               className={`inline-flex itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer text-lg items-center`}
               dropDown={() => {
-                dropDownHandler();
+                setSign(true);
+                setCart(false);
+                setDrop(!drop);
               }}
+              isAdmin={userInfo && userInfo.isAdmin && true}
               dropHidden={dropHidden}
               text={userInfo.name}
               onClick={logoutHandler}
@@ -159,17 +152,6 @@ const Header = () => {
               }}
               text="sign in"
               svg="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-            />
-          )}
-          {userInfo && userInfo.isAdmin && (
-            <DropDown
-              className={`inline-flex itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer text-lg items-center`}
-              dropDown={() => {
-                dropDownHandler();
-              }}
-              dropHidden={dropHidden}
-              text="Admin"
-              isAdmin
             />
           )}
         </div>

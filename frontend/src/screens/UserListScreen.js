@@ -7,22 +7,34 @@ import Loader from "../components/Loader";
 import TableTitles from "../components/styledComponents/TableTitles";
 import TableItem from "../components/styledComponents/TableItem";
 import Table from "../components/styledComponents/Table";
-import { listUsers } from "../actions/userActions";
+import { deleteUser, listUsers } from "../actions/userActions";
 import SvgButton from "../components/styledComponents/SvgButton";
 import { checkSvg, editeSvg, XSvg } from "../components/styledComponents/Icons";
 
-const UserListScreen = () => {
+const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
-    dispatch(listUsers());
-  }, [dispatch]);
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      history.push("/login");
+    }
+  }, [dispatch, history, userInfo, successDelete]);
+
+  const deleteHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
 
   return (
     <>
-      <h1 className="text-lg sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 -ml-1 tracking-widest font-extrabold mt-10">
+      <h1 className="text-lg sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 tracking-widest font-extrabold mt-10">
         users
       </h1>
       {loading ? (
@@ -35,7 +47,7 @@ const UserListScreen = () => {
       ) : (
         <Table>
           <thead className="bg-gray-50">
-            <TableTitles titles={["id", "name", "email", "admin", ""]} />
+            <TableTitles titles={["id", "name", "email", "admin"]} />
           </thead>
           <tbody className="divide-y divide-gray-200 text-gray-700">
             {users.map((user) => (
@@ -54,7 +66,7 @@ const UserListScreen = () => {
                         {editeSvg}
                       </Link>
                       <SvgButton
-                        onClick={() => ""}
+                        onClick={() => deleteHandler(user._id)}
                         className="text-red-700 hover:text-red-500 p-2 md:p-1 lg:p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-600 inline-block text-center transition-colors ease-in-out ml-1 rounded-full"
                       />
                     </span>

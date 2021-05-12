@@ -3,7 +3,7 @@ import React from "react";
 const BurgerMenu = ({ burger, onClick }) => {
   return (
     <button
-      className={`p-1 text-green-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-110 border border-green-100 bg-green-900`}
+      className={`p-1 text-green-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-110 border border-green-100 bg-green-700`}
       onClick={onClick}
     >
       {burger ? (

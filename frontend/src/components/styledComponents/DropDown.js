@@ -27,43 +27,43 @@ const DropDown = ({
         </svg>
       </div>
       <div
-        className={`flex flex-col items-start bg-gray-100 rounded-md w-44 shadow-md absolute top-8 left-2 z-30 py-1 text-sm ${dropHidden}`}
+        className={`bg-gray-100 rounded-md w-44 shadow-md absolute top-8 left-2 z-30  text-sm ${dropHidden} border border-gray-300 text-gray-600`}
       >
-        <Link to={`/profile`} className="w-full mb-1 hover:bg-gray-300 p-2">
-          profile
-        </Link>
-        <Link
-          to={`/`}
-          className="w-full mt-1 hover:bg-gray-300 p-2"
-          onClick={onClick}
-        >
-          logout
-        </Link>
-      </div>
-      {isAdmin && (
-        <div
-          className={`flex flex-col items-start bg-gray-100 rounded-md w-44 shadow-md absolute top-8 left-2 z-30 py-1 text-sm ${dropHidden}`}
-        >
+        {isAdmin && (
+          <span className="border-gray-300 border-b max-w-full flex flex-col w-full py-1 items-start">
+            <Link
+              to={`/admin/userList`}
+              className="w-full mt-1 hover:bg-gray-300 p-2"
+            >
+              users
+            </Link>
+            <Link
+              to={`/admin/productList`}
+              className="w-full  hover:bg-gray-300 p-2"
+            >
+              products
+            </Link>
+            <Link
+              to={`/admin/orderList`}
+              className="w-full mb-1 hover:bg-gray-300 p-2"
+            >
+              orders
+            </Link>
+          </span>
+        )}
+        <span className="flex flex-col w-full max-w-full py-1 items-start">
+          <Link to={`/profile`} className="w-full mt-1 hover:bg-gray-300 p-2">
+            profile
+          </Link>
           <Link
-            to={`/admin/userList`}
+            to={`/`}
             className="w-full mb-1 hover:bg-gray-300 p-2"
+            onClick={onClick}
           >
-            users
+            logout
           </Link>
-          <Link
-            to={`/admin/productList`}
-            className="w-full mt-1 hover:bg-gray-300 p-2"
-          >
-            products
-          </Link>
-          <Link
-            to={`/admin/orderList`}
-            className="w-full mt-1 hover:bg-gray-300 p-2"
-          >
-            orders
-          </Link>
-        </div>
-      )}
+        </span>
+      </div>
     </div>
   );
 };

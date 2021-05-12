@@ -156,7 +156,7 @@ const ProfileScreen = ({ location, history }) => {
           <Table>
             <thead className="bg-gray-50">
               <TableTitles
-                titles={["id", "date", "total", "paid", "delivered", ""]}
+                titles={["id", "date", "total", "paid", "delivered"]}
               />
             </thead>
             <tbody className="divide-y divide-gray-200 text-gray-700">
