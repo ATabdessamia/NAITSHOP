@@ -7,11 +7,13 @@ import Loader from "../components/Loader";
 import TableTitles from "../components/styledComponents/TableTitles";
 import TableItem from "../components/styledComponents/TableItem";
 import Table from "../components/styledComponents/Table";
-import { deleteUser, listUsers } from "../actions/userActions";
 import SvgButton from "../components/styledComponents/SvgButton";
 import { checkSvg, editeSvg, XSvg } from "../components/styledComponents/Icons";
+import DialogBox from "../components/styledComponents/DialogBox";
+import { deleteUser, listUsers } from "../actions/userActions";
 
 const UserListScreen = ({ history }) => {
+  const [showDialog, setShowDialog] = useState(false);
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -30,8 +32,16 @@ const UserListScreen = ({ history }) => {
 
   const deleteHandler = (id) => {
     dispatch(deleteUser(id));
+    setShowDialog(false);
   };
 
+  const showHandler = () => {
+    setShowDialog(true);
+  };
+
+  const cancleHandler = () => {
+    setShowDialog(false);
+  };
   return (
     <>
       <h1 className="text-lg sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 tracking-widest font-extrabold mt-10">
@@ -60,13 +70,19 @@ const UserListScreen = ({ history }) => {
                   item={
                     <span className="w-full max-w-full inline-flex items-center">
                       <Link
-                        to={`/user/${user._id}/edite`}
+                        to={`/admin/user/${user._id}/edit`}
                         className="text-blue-700 hover:text-blue-500 p-2 md:p-1 lg:p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600 inline-block text-center transition-colors ease-in-out mr-1 rounded-full"
                       >
                         {editeSvg}
                       </Link>
+                      {showDialog && (
+                        <DialogBox
+                          onClick={() => deleteHandler(user._id)}
+                          cancle={cancleHandler}
+                        />
+                      )}
                       <SvgButton
-                        onClick={() => deleteHandler(user._id)}
+                        onClick={showHandler}
                         className="text-red-700 hover:text-red-500 p-2 md:p-1 lg:p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-600 inline-block text-center transition-colors ease-in-out ml-1 rounded-full"
                       />
                     </span>
