@@ -8,6 +8,7 @@ const CheckedBox = ({ value, onChange, checked }) => {
           type="checkbox"
           className="h-5 w-5 focus:ring-blue-500 text-blue-600"
           value={value}
+          name="isAdmin"
           onChange={onChange}
           checked={checked}
         />

@@ -39,7 +39,7 @@ const ProfileScreen = ({ location, history }) => {
       history.push("/login");
     } else {
       if (!user.name) {
-        dispatch(getUserDetails());
+        dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
         setFormData({

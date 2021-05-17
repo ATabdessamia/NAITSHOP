@@ -7,8 +7,9 @@ import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import FormInput from "../components/styledComponents/FormInput";
 import FormButton from "../components/styledComponents/FormButton";
-import { getUserDetails } from "../actions/userActions";
 import CheckedBox from "../components/styledComponents/CheckedBox";
+import { getUserDetails, updateUser } from "../actions/userActions";
+import { USER_UPDATE_RESET } from "../constants/userConstants";
 
 const initialState = {
   name: "",
@@ -16,32 +17,52 @@ const initialState = {
   isAdmin: false,
 };
 
-const RegisterScreen = ({ match }) => {
+const RegisterScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
   const [checked, setchecked] = useState(false);
+  const userId = match.params.id;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-  const userId = match.params.id;
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate;
 
   useEffect(() => {
-    if (!user.name || user._id !== userId) {
-      //   dispatch(getUserDetails(userId));
-      console.log("h");
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push("/admin/userlist");
     } else {
-      setFormData({
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      });
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserDetails(userId));
+        user.isAdmin === true ? setchecked(true) : setchecked(false);
+      } else {
+        setFormData({
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+        });
+        user.isAdmin === true ? setchecked(true) : setchecked(false);
+      }
     }
-  }, [dispatch, user, userId]);
+  }, [dispatch, user, userId, successUpdate, history]);
 
   const onChangeValue = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(
+      updateUser({
+        _id: userId,
+        name: formData.name,
+        email: formData.email,
+        isAdmin: formData.isAdmin,
+      })
+    );
   };
 
   return (
@@ -58,6 +79,14 @@ const RegisterScreen = ({ match }) => {
         <h1 className="text-lg sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 -ml-1 tracking-widest font-extrabold mt-10">
           edite user
         </h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && (
+          <Message
+            message={<span className="text-red-900">{error}</span>}
+            type="error"
+            closable
+          />
+        )}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -90,7 +119,10 @@ const RegisterScreen = ({ match }) => {
             <CheckedBox
               value={formData.isAdmin}
               onChange={(e) => {
-                onChangeValue(e);
+                setFormData({
+                  ...formData,
+                  [e.target.name]: e.target.checked,
+                });
                 setchecked(!checked);
               }}
               checked={checked}
