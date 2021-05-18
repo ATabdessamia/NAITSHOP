@@ -8,8 +8,8 @@ import TableTitles from "../components/styledComponents/TableTitles";
 import TableItem from "../components/styledComponents/TableItem";
 import Table from "../components/styledComponents/Table";
 import SvgButton from "../components/styledComponents/SvgButton";
-import { checkSvg, editeSvg, XSvg } from "../components/styledComponents/Icons";
 import DialogBox from "../components/styledComponents/DialogBox";
+import { checkSvg, editeSvg, XSvg } from "../components/styledComponents/Icons";
 import { deleteUser, listUsers } from "../actions/userActions";
 
 const UserListScreen = ({ history }) => {
@@ -20,7 +20,11 @@ const UserListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const userDelete = useSelector((state) => state.userDelete);
-  const { success: successDelete } = userDelete;
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -47,6 +51,14 @@ const UserListScreen = ({ history }) => {
       <h1 className="text-lg sm:text-3xl md:text-4xl uppercase text-gray-700 p-1 tracking-widest font-extrabold mt-10">
         users
       </h1>
+      {loadingDelete && <Loader />}
+      {errorDelete && (
+        <Message
+          message={<span className="text-red-900">{errorDelete}</span>}
+          type="error"
+          closable
+        />
+      )}
       {loading ? (
         <Loader />
       ) : error ? (

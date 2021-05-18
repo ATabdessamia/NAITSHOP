@@ -5,7 +5,7 @@ const Image = ({ src, alt }) => {
     <img
       src={src}
       alt={alt}
-      className="max-w-full h-auto align-middle flex-shrink-0 object-center shadow-sm rounded"
+      className="max-w-full w-full h-auto align-middle flex-shrink-0 object-center shadow-sm rounded"
     />
   );
 };

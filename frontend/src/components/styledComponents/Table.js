@@ -2,8 +2,8 @@ import React from "react";
 
 const Table = ({ children }) => {
   return (
-    <div className="overflow-x-auto w-full mt-3 text-sm xl:text-base ml-1">
-      <table className="max-w-4xl w-full whitespace-nowrap rounded-sm bg-white divide-y divide-gray-300 overflow-hidden">
+    <div className="overflow-x-auto w-full p-1 mt-3 text-sm xl:text-base">
+      <table className="max-w-full w-full whitespace-nowrap rounded-sm bg-white divide-y divide-gray-300 overflow-hidden">
         {children}
       </table>
     </div>
