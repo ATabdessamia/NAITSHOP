@@ -19,9 +19,9 @@ const initialState = {
 
 const RegisterScreen = ({ match, history }) => {
   const dispatch = useDispatch();
+  const userId = match.params.id;
   const [formData, setFormData] = useState(initialState);
   const [checked, setchecked] = useState(false);
-  const userId = match.params.id;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   const userUpdate = useSelector((state) => state.userUpdate);
@@ -82,7 +82,7 @@ const RegisterScreen = ({ match, history }) => {
         {loadingUpdate && <Loader />}
         {errorUpdate && (
           <Message
-            message={<span className="text-red-900">{error}</span>}
+            message={<span className="text-red-900">{errorUpdate}</span>}
             type="error"
             closable
           />
