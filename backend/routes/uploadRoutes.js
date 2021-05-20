@@ -1,6 +1,9 @@
 import path from "path";
 import express from "express";
 import multer from "multer";
+import sharp from "sharp";
+import fs from "fs";
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -34,7 +37,15 @@ const upload = multer({
   },
 });
 
-router.post("/", upload.single("image"), (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
+  const { filename: image } = req.file;
+
+  await sharp(req.file.path)
+    .resize(640, 510)
+    .jpeg({ quality: 90 })
+    .toFile(path.resolve(req.file.destination, "resized", image));
+  fs.unlinkSync(req.file.path);
+
   res.send(`/${req.file.path}`);
 });
 export default router;

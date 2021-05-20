@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormFile = ({ text, onChange, uploading, value }) => {
+const FileUploaded = ({ text, onChange, uploading, value }) => {
   return (
     <div className="my-2">
       <label className="mb-2 inline-block text-gray-700 capitalize ttext-sm sm:text-base md:text-sm lg:text-base">
@@ -24,7 +24,6 @@ const FormFile = ({ text, onChange, uploading, value }) => {
             className="hidden"
             name="image"
             onChange={onChange}
-            multiple
           />
         </label>
       ) : (
@@ -34,4 +33,4 @@ const FormFile = ({ text, onChange, uploading, value }) => {
   );
 };
 
-export default FormFile;
+export default FileUploaded;

@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import FormInput from "../components/styledComponents/FormInput";
 import FormButton from "../components/styledComponents/FormButton";
-import FormFile from "../components/styledComponents/FormFile";
+import FileUploaded from "../components/styledComponents/FileUploaded";
 import { listProductDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
@@ -151,7 +151,7 @@ const ProductEditeScreen = ({ match, history }) => {
               value={formData.price}
               onChange={(e) => onChangeValue(e)}
             />
-            <FormFile
+            <FileUploaded
               text="image"
               onChange={uploadFileHandler}
               uploading={uploading && <Loader />}
