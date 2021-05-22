@@ -164,7 +164,7 @@ const ProfileScreen = ({ location, history }) => {
                 <tr key={order._id} className="hover:bg-gray-100">
                   <TableItem item={order._id} />
                   <TableItem item={order.createdAt.substring(0, 10)} />
-                  <TableItem item={order.totalPrice} />
+                  <TableItem item={`$${order.totalPrice}`} />
                   <TableItem
                     item={order.isPaid ? order.paidAt.substring(0, 10) : XSvg}
                   />
