@@ -12,13 +12,13 @@ import Image from "../components/styledComponents/Image";
 import CardList from "../components/styledComponents/CardList";
 import CardListItems from "../components/styledComponents/CardListItems";
 import CardSpan from "../components/styledComponents/CardSpan";
+import FormInput from "../components/styledComponents/FormInput";
+import FormButton from "../components/styledComponents/FormButton";
 import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
-import FormInput from "../components/styledComponents/FormInput";
-import FormButton from "../components/styledComponents/FormButton";
 
 const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
