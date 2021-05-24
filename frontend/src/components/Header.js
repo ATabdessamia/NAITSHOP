@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Route } from "react-router-dom";
 
 import BurgerMenu from "./styledComponents/BurgerMenu";
 import DropDown from "./styledComponents/DropDown";
 import NavBrand from "./styledComponents/NavBrand";
 import NavLinks from "./styledComponents/NavLinks";
+import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
 
 const Header = () => {
@@ -55,19 +57,29 @@ const Header = () => {
 
   return (
     <header className="bg-gradient-to-r from-green-700 via-green-600 to-green-500 p-5 shadow-md z-50 relative">
-      <nav className="mx-auto md:w-3/4 sm:w-4/5 h-full w-full">
+      <nav className="h-full w-full">
         <div className="flex justify-between items-center p-2">
-          <div className="font-mergim font-black text-2xl text-green-50">
-            <NavBrand
-              onClick={() => {
-                setSign(false);
-                setCart(false);
-                setDrop(true);
-              }}
+          <div className="flex items-center lg:mx-5">
+            <div className="font-mergim font-black text-2xl text-green-50 mr-5">
+              <NavBrand
+                onClick={() => {
+                  setSign(false);
+                  setCart(false);
+                  setDrop(true);
+                }}
+              />
+            </div>
+            <Route
+              render={({ history }) => (
+                <SearchBox
+                  responsive="md:flex hidden sm:hidden w-full"
+                  history={history}
+                />
+              )}
             />
           </div>
           <div
-            className="hidden md:flex itemes-center uppercase font-semibold justify-center"
+            className="hidden md:flex itemes-center uppercase font-semibold justify-center lg:mx-5"
             ref={refMd}
           >
             <NavLinks
@@ -84,7 +96,7 @@ const Header = () => {
 
             {userInfo ? (
               <DropDown
-                className={`inline-flex ml-2 itemes-center text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
+                className={`inline-flex ml-2 justify-evenly text-green-50 ${link_sign} hover:text-opacity-100 cursor-pointer items-center`}
                 dropDown={() => {
                   setSign(true);
                   setCart(false);
@@ -115,7 +127,7 @@ const Header = () => {
       </nav>
       <nav className={`md:hidden ${burgerHidden} mt-5`}>
         <div
-          className="uppercase px-2 pt-2 pb-3 space-y-1 flex flex-col items-start justify-center ml-2 sm:ml-20"
+          className="uppercase px-2 pt-2 pb-3 space-y-1 flex flex-col items-start justify-center ml-2"
           ref={refSm}
         >
           <NavLinks
@@ -155,6 +167,7 @@ const Header = () => {
             />
           )}
         </div>
+        <Route render={({ history }) => <SearchBox history={history} />} />
       </nav>
     </header>
   );

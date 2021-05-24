@@ -2,11 +2,9 @@
 @import "../node_modules/antd/lib/alert/style/index.css";
 @import "../node_modules/antd/lib/steps/style/index.css";
 @import "../node_modules/antd/lib/icon/style/index.css";
+@import "../node_modules/antd/lib/pagination/style/index.css";
+@import "../node_modules/antd/lib/select/style/index.css";
 
-/* @import "../node_modules/antd/lib/pagination/style/index.css";
-@import "../node_modules/antd/lib/dropdown/style/index.css";
-@import "../node_modules/antd/lib/menu/style/index.css";
-@import "../node_modules/antd/lib/select/style/index.css"; */
 main {
   min-height: calc(100vh - 132px);
 }
