@@ -1,15 +1,17 @@
 import React from "react";
 import { Pagination } from "antd";
 
-const Paginate = ({ page, pages }) => {
-  console.log(pages);
+const Paginate = ({ page, pageSize, total, onPaginate, current }) => {
+  if (pageSize === undefined) return null;
   return (
     <div className="flex justify-center my-4">
       <Pagination
-        defaultCurrent={page}
-        total={pages}
+        current={+current}
+        total={total}
+        pageSize={pageSize}
         responsive
         simple
+        onChange={(page) => onPaginate(page)}
         hideOnSinglePage
       />
     </div>

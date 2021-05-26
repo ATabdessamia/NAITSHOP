@@ -162,12 +162,12 @@ const ProductScreen = ({ history, match }) => {
                 {product.reviews.map((review) => (
                   <CardListItems key={review._id}>
                     <strong>{review.name}</strong>
-                    <p className="flex items-center flex-wrap text-sm text-gray-700 text-opacity-70">
+                    <div className="flex items-center flex-wrap text-sm text-gray-700 text-opacity-70">
                       <Rating value={review.rating} />
                       <span className="ml-1">
                         {review.createdAt.substring(0, 10)}
                       </span>
-                    </p>
+                    </div>
                     <p className="my-2 p-1">{review.comment}</p>
                   </CardListItems>
                 ))}

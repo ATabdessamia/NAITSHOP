@@ -4,19 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listProducts } from "../actions/productActions";
 import Paginate from "../components/Paginate";
+import { listProducts } from "../actions/productActions";
 
-const HomeScreen = ({ match }) => {
+const HomeScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const keyword = match.params.keyword;
+  const isAdmin = false;
   const pageNumber = match.params.pageNumber || 1;
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pages, page } = productList;
+  const { loading, error, products, pageSize, total } = productList;
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
+
+  const onPaginate = (page) => {
+    history.push(
+      !isAdmin
+        ? keyword
+          ? `/search/${keyword}/page/${page}`
+          : `/page/${page}`
+        : `/admin/productlist/${page}`
+    );
+  };
 
   return (
     <>
@@ -41,7 +52,12 @@ const HomeScreen = ({ match }) => {
           })}
         </div>
       )}
-      <Paginate page={page} pages={pages} />
+      <Paginate
+        current={pageNumber}
+        pageSize={pageSize}
+        total={total}
+        onPaginate={onPaginate}
+      />
     </>
   );
 };

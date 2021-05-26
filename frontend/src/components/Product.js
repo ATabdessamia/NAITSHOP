@@ -7,7 +7,7 @@ const Product = ({ product }) => {
   return (
     <div className="border p-3 rounded-sm shadow-sm text-gray-700 break-word bg-clip-border">
       <div className="mb-3">
-        <Link to={`product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <img
             src={product.image}
             alt={product.name}
@@ -18,7 +18,7 @@ const Product = ({ product }) => {
 
       <div className="px-3 my-2">
         <Link
-          to={`product/${product._id}`}
+          to={`/product/${product._id}`}
           className="hover:underline hover:text-gray-900 font-light"
         >
           <strong>{product.name}</strong>
