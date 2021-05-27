@@ -14,6 +14,7 @@ import CardListItems from "../components/styledComponents/CardListItems";
 import CardSpan from "../components/styledComponents/CardSpan";
 import FormInput from "../components/styledComponents/FormInput";
 import FormButton from "../components/styledComponents/FormButton";
+import Meta from "../components/Meta";
 import {
   listProductDetails,
   createProductReview,
@@ -80,6 +81,7 @@ const ProductScreen = ({ history, match }) => {
         />
       ) : (
         <>
+          <Meta title={product.name} />
           <div className="my-10 -mx-3.5 flex flex-wrap">
             <Card className="px-5 w-full md:w-1/2 md:flex-basis-50 relative">
               <Image src={product.image} alt={product.name} />
