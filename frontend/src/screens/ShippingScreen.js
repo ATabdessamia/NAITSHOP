@@ -12,6 +12,7 @@ const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   const [formData, setFormData] = useState({
+    cin: shippingAddress.cin,
     address: shippingAddress.address,
     city: shippingAddress.city,
     postalCode: shippingAddress.postalCode,
@@ -35,6 +36,14 @@ const ShippingScreen = ({ history }) => {
           shipping
         </h1>
         <form className="mt-3" onSubmit={(e) => submitHandler(e)}>
+          <FormInput
+            text="cin"
+            name="cin"
+            type="text"
+            placeholder="Enter national identity card"
+            value={formData.cin}
+            onChange={(e) => onChangeValue(e)}
+          />
           <FormInput
             text="address"
             name="address"

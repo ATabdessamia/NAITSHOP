@@ -1,3 +1,7 @@
+# CartShopping project
+
+![GitHub Logo](/uploads/Screenshot from 2021-05-31 16-43-38.png)
+
 # Resources used on the project
 
 [Create React App](https://github.com/facebook/create-react-app).

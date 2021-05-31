@@ -40,6 +40,7 @@ const PaymentScreen = ({ history }) => {
             </h3>
             <FormRadio
               checked={selected === 1}
+              value="PayPal"
               onChange={(e) => {
                 setPaymentMethod(e.target.value);
                 setSelected(1);

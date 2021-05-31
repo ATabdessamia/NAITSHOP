@@ -66,7 +66,7 @@ const OrderScreen = ({ match, history }) => {
       };
       document.body.appendChild(script);
     };
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
@@ -80,12 +80,20 @@ const OrderScreen = ({ match, history }) => {
   }, [dispatch, orderId, successPay, order, successDeliver, history, userInfo]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
+  };
+
+  const AdminPaymentHandler = () => {
+    dispatch(
+      payOrder(orderId, {
+        cin: order.shippingAddress.cin,
+        email_address: order.user.email,
+      })
+    );
   };
 
   return (
@@ -106,6 +114,9 @@ const OrderScreen = ({ match, history }) => {
           <div className="-mx-3.5 flex flex-wrap">
             <DivideBox>
               <DivideBoxItem title="shipping">
+                <DivideBoxParagraph title="cin">
+                  {order.shippingAddress.cin}
+                </DivideBoxParagraph>
                 <DivideBoxParagraph title="name">
                   {order.user.name}
                 </DivideBoxParagraph>
@@ -216,13 +227,25 @@ const OrderScreen = ({ match, history }) => {
                 {!order.isPaid && (
                   <div className="py-3 relative block px-5">
                     {loadingPay && <Loader />}
-                    {!sdkReady ? (
-                      <Loader />
+                    {order.paymentMethod === "PayPal" ? (
+                      !sdkReady ? (
+                        <Loader />
+                      ) : (
+                        <PayPalButton
+                          amount={order.totalPrice}
+                          onSuccess={successPaymentHandler}
+                        />
+                      )
                     ) : (
-                      <PayPalButton
-                        amount={order.totalPrice}
-                        onSuccess={successPaymentHandler}
-                      />
+                      userInfo &&
+                      userInfo.isAdmin && (
+                        <div className="py-3 relative block px-5">
+                          <CardButton
+                            onClick={AdminPaymentHandler}
+                            text="mark as paid"
+                          />
+                        </div>
+                      )
                     )}
                   </div>
                 )}

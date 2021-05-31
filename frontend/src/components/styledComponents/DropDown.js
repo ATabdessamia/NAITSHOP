@@ -27,7 +27,7 @@ const DropDown = ({
         </svg>
       </div>
       <div
-        className={`bg-gray-100 rounded-md w-44 shadow-md absolute top-8 left-2 z-30  text-sm ${dropHidden} border border-gray-300 text-gray-600`}
+        className={`bg-gray-100 rounded-md w-44 md:w-36 lg:w-44 shadow-md absolute top-8 left-2 z-30  text-sm ${dropHidden} border border-gray-300 text-gray-600`}
       >
         {isAdmin && (
           <span className="border-gray-300 border-b max-w-full flex flex-col w-full py-1 items-start">

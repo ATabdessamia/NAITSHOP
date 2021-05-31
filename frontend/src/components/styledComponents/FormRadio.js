@@ -19,7 +19,6 @@ const FormRadio = ({ text, checked, onChange, value, id }) => {
 
 FormRadio.defaultProps = {
   id: "PayPal",
-  value: "PayPal",
   text: "PayPal or Credit Card",
 };
 
