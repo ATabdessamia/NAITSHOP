@@ -1,6 +1,6 @@
 # CartShopping project
 
-![GitHub Logo](/uploads/Screenshot from 2021-05-31 16-43-38.png)
+![GitHub Logo](/uploads/screenShots/main.png)
 
 # Resources used on the project
 
